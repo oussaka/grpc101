@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ensep/grpc101/handler"
 	"log"
 	"net"
 
@@ -19,11 +20,11 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	s := profile.Server{}
+	s := handler.Profile{}
 
 	grpcServer := grpc.NewServer()
 
-	profile.RegisterProfileServiceServer(grpcServer, &s)
+	profile.RegisterProfileServer(grpcServer, &s)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)
