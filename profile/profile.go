@@ -4,14 +4,15 @@ package profile
 import (
 	"log"
 
-	"golang.org/x/net/context"
 	"github.com/ensep/grpc101/proto/profile"
+	"golang.org/x/net/context"
 )
 
 type Server struct {
+	profile.UnimplementedProfileServer
 }
 
 func (s *Server) Create(ctx context.Context, req *profile.CreateRequest) (*profile.CreateResponse, error) {
-	log.Printf("Receive message body from client: %s", req.Body)
-	return &Message{Body: "Profile Created!"}, nil
+	log.Printf("Receive message body from client: %s", req.Name)
+	return &profile.CreateResponse{Message: "Profile Created!"}, nil
 }

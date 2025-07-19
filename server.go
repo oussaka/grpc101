@@ -3,10 +3,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/ensep/grpc101/profile"
+	pb "github.com/ensep/grpc101/proto/profile"
 	"log"
 	"net"
 
-	"github.com/ensep/grpc101/proto/profile"
 	"google.golang.org/grpc"
 )
 
@@ -23,7 +24,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
-	profile.RegisterProfileServiceServer(grpcServer, &s)
+	pb.RegisterProfileServer(grpcServer, &s)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)
